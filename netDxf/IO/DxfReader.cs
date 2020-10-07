@@ -10507,7 +10507,12 @@ namespace netDxf.IO
                                 enumerator.MoveNext();
                                 break;
                             case 330:
-                                Layer layer = (Layer) this.doc.GetObjectByHandle((string) recordEntry.Value);
+                                var layer = (Layer) this.doc.GetObjectByHandle((string) recordEntry.Value);
+                                if (layer is null)
+                                {
+                                    enumerator.MoveNext();
+                                    continue;
+                                }
                                 properties = this.ReadLayerStateProperties(layer.Name, enumerator);
                                 layerState.Properties.Add(properties.Name, properties);
                                 break;
