@@ -142,8 +142,10 @@ namespace netDxf.Entities
 
             this.block = block;
             this.position = position;
-            if (scale <= 0)
-                throw new ArgumentOutOfRangeException(nameof(scale), scale, "The Insert scale must be greater than zero.");
+
+            if (scale == 0)
+                throw new ArgumentOutOfRangeException(nameof(scale), scale, "The Insert scale should not be zero.");
+
             this.scale = new Vector3(scale);
             this.rotation = 0.0;
             this.endSequence = new EndSequence(this);
